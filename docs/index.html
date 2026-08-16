@@ -388,6 +388,170 @@
                 padding: 45px 0;
             }
         }
+
+        /* =========================
+           CAPSTONE ENHANCEMENTS
+        ========================= */
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 16px;
+            border: 1px solid #33415f;
+            border-radius: 10px;
+            background: #111a2e;
+            color: #dbe4f2;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.18s ease, border-color 0.18s ease;
+        }
+
+        .button:hover {
+            text-decoration: none;
+            border-color: #38bdf8;
+            transform: translateY(-1px);
+        }
+
+        .button.primary {
+            background: #17223a;
+            border-color: #38bdf8;
+            color: #f4f7fb;
+        }
+
+        .summary-grid,
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .summary-card,
+        .method-card {
+            border: 1px solid #26304a;
+            background: #111a2e;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .summary-card .kicker,
+        .method-card .kicker {
+            color: #38bdf8;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .summary-card h3,
+        .method-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.05rem;
+        }
+
+        .summary-card p,
+        .method-card p {
+            margin-bottom: 0;
+            font-size: 0.93rem;
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .pipeline-step {
+            position: relative;
+            border: 1px solid #26304a;
+            background: #111a2e;
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+        }
+
+        .pipeline-step strong {
+            display: block;
+            color: #f4f7fb;
+            margin-bottom: 5px;
+        }
+
+        .pipeline-step span {
+            color: #8f9bb0;
+            font-size: 0.78rem;
+        }
+
+        .boundary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .boundary-card {
+            border: 1px solid #26304a;
+            background: #111a2e;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .boundary-card strong {
+            display: block;
+            color: #f4f7fb;
+            margin-bottom: 7px;
+        }
+
+        .boundary-card p {
+            margin-bottom: 0;
+            font-size: 0.92rem;
+        }
+
+        .metric-note {
+            margin-top: 6px;
+            color: #8996aa;
+            font-size: 0.78rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .summary-grid,
+            .method-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pipeline {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .summary-grid,
+            .method-grid,
+            .boundary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
     </style>
 </head>
 
@@ -419,6 +583,24 @@
         <p class="author">
             Aryav Deep · Machine Learning Intern
         </p>
+
+        <div class="hero-actions">
+            <a
+                class="button primary"
+                href="https://github.com/aryav11/flyrank-ml-internship"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View GitHub Repository →
+            </a>
+
+            <a
+                class="button"
+                href="#results"
+            >
+                View Results ↓
+            </a>
+        </div>
 
         <div class="meta-grid">
 
@@ -457,16 +639,16 @@
 
     <div class="container">
 
+        <a href="#overview">Overview</a>
         <a href="#abstract">Abstract</a>
-        <a href="#introduction">Introduction</a>
         <a href="#question">Question</a>
         <a href="#data">Data</a>
-        <a href="#methodology">Methodology</a>
+        <a href="#methodology">Method</a>
         <a href="#results">Results</a>
-        <a href="#limitations">Limitations</a>
+        <a href="#interpretation">Interpretation</a>
         <a href="#recommendations">Recommendations</a>
+        <a href="#limitations">Limits</a>
         <a href="#reproducibility">Reproducibility</a>
-        <a href="#acknowledgements">Data Credit</a>
 
     </div>
 
@@ -476,73 +658,114 @@
 <main>
 
 
+
 <!-- =========================================================
-     ABSTRACT
+     EXECUTIVE SUMMARY
 ========================================================= -->
 
-<section id="abstract">
+<section id="overview">
 
     <div class="container">
 
         <div class="section-number">
-            00 · ABSTRACT
+            00 · EXECUTIVE SUMMARY
         </div>
 
-        <h2>
-            Abstract
-        </h2>
+        <h2>Project at a Glance</h2>
 
         <p>
-            Content teams often need to decide which webpages deserve
-            attention first when a large content inventory shows mixed
-            search and engagement performance. This study investigates
-            whether historical search-performance, traffic, engagement,
-            content, and freshness signals can support a practical
-            prioritization workflow for content-refresh review.
+            This capstone turns webpage search and engagement signals
+            into a ranked review queue so a content or SEO team can
+            focus human attention where the observed evidence is strongest.
         </p>
 
-        <p>
-            The analysis uses an anonymized dataset containing 30,000
-            webpages across 32 clients. The decision problem is to
-            identify which webpages should be reviewed sooner rather
-            than later, so that content and SEO teams can focus their
-            limited review effort on the pages showing stronger
-            evidence of observed decline.
-        </p>
+        <div class="summary-grid">
 
-        <p>
-            The modeling task is formulated as binary classification
-            followed by ranking. The target identifies webpages
-            associated with an observed declining trend. Logistic
-            Regression is evaluated against the ML-07 rule-based
-            baseline using a client-grouped holdout design, with
-            23,837 training rows from 25 clients and 6,163 testing rows
-            from 7 unseen clients.
-        </p>
+            <div class="summary-card">
+                <div class="kicker">Problem</div>
+                <h3>Which pages first?</h3>
+                <p>
+                    Prioritize webpages for content-refresh review
+                    instead of treating a 30,000-page inventory equally.
+                </p>
+            </div>
 
-        <p>
-            On the recorded grouped evaluation, Logistic Regression
-            achieved Precision@20 of 1.00 and Precision@50 of 1.00,
-            compared with 0.55 and 0.48 for the ML-07 rule baseline.
-            The resulting scores provide evidence for ranking and
-            prioritization on this evaluated dataset and split.
-        </p>
+            <div class="summary-card">
+                <div class="kicker">Approach</div>
+                <h3>Rank, then review</h3>
+                <p>
+                    Logistic Regression combines 28 features into a
+                    score that can be used for prioritization.
+                </p>
+            </div>
 
-        <div class="highlight">
+            <div class="summary-card">
+                <div class="kicker">Evaluation</div>
+                <h3>Client-grouped holdout</h3>
+                <p>
+                    23,837 training rows / 25 clients versus
+                    6,163 test rows / 7 unseen clients.
+                </p>
+            </div>
 
-            <strong>Practical takeaway:</strong>
-
-            The model can be used as a decision-support signal to help
-            organize webpage review priority. It does not determine
-            whether a page should ultimately be refreshed, and the
-            recorded evaluation does not establish that refreshing a
-            page will cause improved search performance.
+            <div class="summary-card">
+                <div class="kicker">Decision</div>
+                <h3>Human-in-the-loop</h3>
+                <p>
+                    The output is a review signal, not an automatic
+                    content publishing or refresh system.
+                </p>
+            </div>
 
         </div>
 
     </div>
 
 </section>
+
+<!-- =========================================================
+     ABSTRACT
+========================================================= -->
+
+
+<section id="abstract">
+
+    <div class="container">
+
+        <div class="section-number">
+            01 · ABSTRACT
+        </div>
+
+        <h2>Abstract</h2>
+
+        <p>
+            This study asks which webpages should be prioritized for
+            content-refresh review when search and engagement signals
+            show mixed performance. The analysis uses an anonymized
+            dataset of 30,000 webpages across 32 clients and frames
+            observed decline as a binary classification target followed
+            by ranking.
+            Logistic Regression is compared with the ML-07 rule-based
+            baseline using a client-grouped holdout with 23,837 training
+            rows from 25 clients and 6,163 testing rows from 7 unseen
+            clients. On the recorded grouped evaluation, the model
+            achieved Precision@20 and Precision@50 of 1.00, compared
+            with 0.55 and 0.48 for the baseline.
+            The result supports using the model as a human-review
+            prioritization signal on this evaluated dataset and split,
+            not as causal proof or a guarantee of future performance.
+        </p>
+
+        <div class="highlight">
+            <strong>Practical takeaway:</strong>
+            Rank first, review second, and keep the final content decision
+            with a human reviewer.
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- =========================================================
      INTRODUCTION
@@ -749,6 +972,19 @@
 
         </div>
 
+
+        <h3>
+            Dataset Provenance
+        </h3>
+
+        <p>
+            The capstone model uses the project's anonymized content-refresh
+            extract at <code>data/raw/content_refresh_anonymized.csv</code>.
+            The public paper reports the model-facing dataset statistics
+            used in the executable workflow rather than exposing private
+            client-level source records.
+        </p>
+
         <h3>
             Time Windows
         </h3>
@@ -840,6 +1076,45 @@
         <h2>
             Methodology
         </h2>
+
+
+        <h3>
+            Modeling Workflow
+        </h3>
+
+        <div class="pipeline">
+
+            <div class="pipeline-step">
+                <strong>30k Pages</strong>
+                <span>Input inventory</span>
+            </div>
+
+            <div class="pipeline-step">
+                <strong>Signals</strong>
+                <span>Search + engagement + content</span>
+            </div>
+
+            <div class="pipeline-step">
+                <strong>28 Features</strong>
+                <span>Prediction inputs</span>
+            </div>
+
+            <div class="pipeline-step">
+                <strong>Logistic Regression</strong>
+                <span>Binary model</span>
+            </div>
+
+            <div class="pipeline-step">
+                <strong>Risk Score</strong>
+                <span>Ranking signal</span>
+            </div>
+
+            <div class="pipeline-step">
+                <strong>Review Queue</strong>
+                <span>Human decision</span>
+            </div>
+
+        </div>
 
         <h3>
             Target
@@ -974,6 +1249,15 @@
 
             </table>
 
+        </div>
+
+
+        <div class="highlight">
+            <strong>Why grouped validation?</strong>
+            Pages from the same client can share site-level patterns.
+            Holding out entire clients makes the evaluation more
+            conservative than randomly mixing pages from the same client
+            across training and testing.
         </div>
 
         <h3>
@@ -1156,6 +1440,35 @@
 
         </div>
 
+
+        <h3>
+            Additional Evaluation Metrics
+        </h3>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Logistic Regression</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr><td>ROC AUC</td><td>0.850</td></tr>
+                    <tr><td>Average Precision</td><td>0.873</td></tr>
+                    <tr><td>Accuracy</td><td>0.756</td></tr>
+                    <tr><td>Precision</td><td>0.807</td></tr>
+                    <tr><td>Recall</td><td>0.687</td></tr>
+                    <tr><td>F1</td><td>0.742</td></tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
         <h3>
             Base Rate Context
         </h3>
@@ -1170,6 +1483,109 @@
 
 </section>
 
+
+
+<!-- =========================================================
+     INTERPRETATION
+========================================================= -->
+
+<section id="interpretation">
+
+    <div class="container">
+
+        <div class="section-number">
+            05 · INTERPRETATION
+        </div>
+
+        <h2>Interpretation</h2>
+
+        <p>
+            The model's main value is ranking: it converts multiple
+            webpage signals into a consistent prioritization score so
+            the team can inspect a smaller set of pages first.
+        </p>
+
+        <div class="method-grid">
+
+            <div class="method-card">
+                <div class="kicker">Observed result</div>
+                <h3>Strong top-K ranking</h3>
+                <p>
+                    The model outperformed the ML-07 rule baseline on
+                    both reported top-K precision measures in the
+                    grouped holdout.
+                </p>
+            </div>
+
+            <div class="method-card">
+                <div class="kicker">What it means</div>
+                <h3>Better triage signal</h3>
+                <p>
+                    Higher-ranked pages deserve earlier human inspection;
+                    the score does not itself decide the editorial action.
+                </p>
+            </div>
+
+            <div class="method-card">
+                <div class="kicker">What it does not mean</div>
+                <h3>No causal guarantee</h3>
+                <p>
+                    A high score does not prove that a refresh will cause
+                    better rankings, traffic, or engagement.
+                </p>
+            </div>
+
+            <div class="method-card">
+                <div class="kicker">Generalization</div>
+                <h3>Evaluate again over time</h3>
+                <p>
+                    Future monitoring should test new time periods and
+                    distributions before treating the workflow as stable.
+                </p>
+            </div>
+
+        </div>
+
+        <h3>Model Boundaries</h3>
+
+        <div class="boundary-grid">
+
+            <div class="boundary-card">
+                <strong>✓ Appropriate use</strong>
+                <p>
+                    Prioritize pages for human content and SEO review.
+                </p>
+            </div>
+
+            <div class="boundary-card">
+                <strong>✓ Appropriate use</strong>
+                <p>
+                    Compare a consistent ML ranking against a transparent
+                    rule-based baseline.
+                </p>
+            </div>
+
+            <div class="boundary-card">
+                <strong>✕ Not supported</strong>
+                <p>
+                    Automatically publish, rewrite, delete, or redirect
+                    webpages from the model output.
+                </p>
+            </div>
+
+            <div class="boundary-card">
+                <strong>✕ Not supported</strong>
+                <p>
+                    Claim that the model predicts Google's ranking
+                    algorithm or proves future causal impact.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- =========================================================
      LIMITATIONS
@@ -1279,7 +1695,9 @@
 
                 <p>
                     Prioritize these webpages for the earliest human
-                    review and potential refresh.
+                    review. Inspect search intent, content quality,
+                    freshness, and supporting performance signals before
+                    deciding on a refresh.
                 </p>
 
             </div>
@@ -1295,8 +1713,9 @@
                 </h3>
 
                 <p>
-                    Perform a focused content and performance review
-                    before deciding whether a refresh is justified.
+                    Perform a focused content and performance review,
+                    then decide whether a refresh, expansion, technical
+                    investigation, or no change is appropriate.
                 </p>
 
             </div>
@@ -1312,8 +1731,8 @@
                 </h3>
 
                 <p>
-                    Continue tracking performance without assigning
-                    immediate editing effort.
+                    Continue tracking performance and revisit the page
+                    if search, traffic, or engagement evidence changes.
                 </p>
 
             </div>
@@ -1329,8 +1748,9 @@
                 </h3>
 
                 <p>
-                    Do not allocate additional refresh effort based on
-                    the current evidence.
+                    Do not allocate immediate refresh effort based only
+                    on this model; other business or editorial context
+                    may still justify review.
                 </p>
 
             </div>
@@ -1514,6 +1934,31 @@
 
         </ul>
 
+
+        <h3>
+            Re-run Workflow
+        </h3>
+
+        <div class="highlight">
+            <code>
+                git clone https://github.com/aryav11/flyrank-ml-internship.git
+                <br>
+                cd flyrank-ml-internship
+                <br>
+                # Create/use the project's documented Python environment
+                <br>
+                # Install the repository requirements
+                <br>
+                # Run the notebooks in work/notebooks/
+            </code>
+        </div>
+
+        <p class="metric-note">
+            The executable notebooks are the source of truth for the
+            feature definitions, random seeds, grouped split, and
+            generated metrics.
+        </p>
+
         <h3>
             Repository
         </h3>
@@ -1586,6 +2031,18 @@
             causes changes in search performance.
         </p>
 
+        <div class="highlight">
+            <strong>Data credit:</strong>
+            Built on the FlyRank ML Internship dataset.
+            <a
+                href="https://flyrank.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                FlyRank
+            </a>
+        </div>
+
     </div>
 
 </section>
@@ -1614,6 +2071,20 @@
             Measured, directional decision-support evidence — not
             causal proof.
         </p>
+
+        <div class="footer-links">
+            <a
+                href="https://github.com/aryav11/flyrank-ml-internship"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub Repository
+            </a>
+
+            <a href="#top">
+                Back to top ↑
+            </a>
+        </div>
 
     </div>
 
