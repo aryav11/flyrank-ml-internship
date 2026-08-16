@@ -1,0 +1,3 @@
+# ML-12 — Employer-Facing Summary
+
+I built a machine-learning workflow to prioritize webpages for content-refresh review using anonymized search, traffic, engagement, and content signals from 30,000 webpages across 32 clients. I compared a Logistic Regression ranking approach with the existing ML-07 rule baseline using a client-grouped holdout evaluation, achieving recorded Precision@20 and Precision@50 results of 1.00 versus 0.55 and 0.48 for the baseline. The resulting workflow converts model predictions into a human-review action playbook while treating the model as decision support rather than making causal claims about the effect of content refreshes.

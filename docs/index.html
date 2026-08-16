@@ -458,6 +458,7 @@
     <div class="container">
 
         <a href="#abstract">Abstract</a>
+        <a href="#introduction">Introduction</a>
         <a href="#question">Question</a>
         <a href="#data">Data</a>
         <a href="#methodology">Methodology</a>
@@ -492,42 +493,50 @@
         </h2>
 
         <p>
-            This study examines whether historical search-performance,
-            traffic, engagement, content, and freshness signals can
-            support prioritization of webpages for content-refresh
-            review. The analysis uses an anonymized dataset containing
-            30,000 webpages across 32 clients.
+            Content teams often need to decide which webpages deserve
+            attention first when a large content inventory shows mixed
+            search and engagement performance. This study investigates
+            whether historical search-performance, traffic, engagement,
+            content, and freshness signals can support a practical
+            prioritization workflow for content-refresh review.
         </p>
 
         <p>
-            The decision problem is whether a content or SEO team should
-            review a webpage sooner rather than later. The modeling task
-            is formulated as binary classification followed by ranking.
-            The target identifies webpages associated with an observed
-            declining trend.
+            The analysis uses an anonymized dataset containing 30,000
+            webpages across 32 clients. The decision problem is to
+            identify which webpages should be reviewed sooner rather
+            than later, so that content and SEO teams can focus their
+            limited review effort on the pages showing stronger
+            evidence of observed decline.
         </p>
 
         <p>
-            Logistic Regression is evaluated using a client-grouped
-            holdout design. The recorded evaluation contains 23,837
-            training rows from 25 clients and 6,163 testing rows from
-            7 unseen clients, with zero client overlap.
+            The modeling task is formulated as binary classification
+            followed by ranking. The target identifies webpages
+            associated with an observed declining trend. Logistic
+            Regression is evaluated against the ML-07 rule-based
+            baseline using a client-grouped holdout design, with
+            23,837 training rows from 25 clients and 6,163 testing rows
+            from 7 unseen clients.
         </p>
 
         <p>
-            On that recorded evaluation, Logistic Regression produced
-            Precision@20 of 1.00 and Precision@50 of 1.00, compared with
-            0.55 and 0.48 for the ML-07 rule-based baseline.
+            On the recorded grouped evaluation, Logistic Regression
+            achieved Precision@20 of 1.00 and Precision@50 of 1.00,
+            compared with 0.55 and 0.48 for the ML-07 rule baseline.
+            The resulting scores provide evidence for ranking and
+            prioritization on this evaluated dataset and split.
         </p>
 
         <div class="highlight">
 
-            <strong>Interpretation:</strong>
+            <strong>Practical takeaway:</strong>
 
-            The scores are measured results for this dataset and this
-            evaluation design. They are evidence for prioritization
-            quality, not a guarantee of future performance and not
-            evidence that a content refresh itself causes improvement.
+            The model can be used as a decision-support signal to help
+            organize webpage review priority. It does not determine
+            whether a page should ultimately be refreshed, and the
+            recorded evaluation does not establish that refreshing a
+            page will cause improved search performance.
 
         </div>
 
@@ -535,6 +544,90 @@
 
 </section>
 
+<!-- =========================================================
+     INTRODUCTION
+========================================================= -->
+
+<section id="introduction">
+
+    <div class="container">
+
+        <div class="section-number">
+            00.5 · INTRODUCTION
+        </div>
+
+        <h2>
+            Introduction
+        </h2>
+
+        <p>
+            The content-refresh problem is fundamentally a
+            prioritization problem. A content or SEO team may have
+            many webpages to review, but not every page requires the
+            same level of attention at the same time. The goal of this
+            project is therefore not simply to predict a label, but to
+            turn available search and engagement signals into a useful
+            ranking of webpages for human review.
+        </p>
+
+        <p>
+            This study focuses on webpages whose observed performance
+            indicates a declining trend. The dataset contains 30,000
+            unique content items across 32 clients, with historical
+            search, traffic, engagement, content, and freshness
+            signals. These signals provide the evidence used to
+            distinguish pages that may deserve earlier review from
+            pages that can be monitored or left without immediate
+            refresh effort.
+        </p>
+
+        <p>
+            To test whether a machine-learning approach can improve
+            this prioritization, the project compares the ML-07
+            rule-based baseline with a Logistic Regression model.
+            Evaluation is performed using a client-grouped split so
+            that the testing clients are not present in the training
+            data. This creates a clearer test of whether the ranking
+            approach can identify declining webpages for clients that
+            were not used for training.
+        </p>
+
+        <p>
+            The recorded evaluation shows a substantial improvement
+            over the baseline: Precision@20 increases from 0.55 to
+            1.00, while Precision@50 increases from 0.48 to 1.00.
+            These results support using the model output as a
+            prioritization signal for the next stage of human review.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                How this fits the content workflow:
+            </strong>
+
+            Search and engagement signals
+            → model-based prioritization
+            → ranked review queue
+            → human content assessment
+            → refresh, monitor, or no-action decision.
+
+        </div>
+
+        <p>
+            The model is intentionally treated as decision support
+            rather than an autonomous content decision-maker. The
+            analysis is observational, the target is derived from
+            observed trend direction, and the evaluation uses one
+            fixed grouped client split. Therefore, the results should
+            be interpreted as measured evidence from this project
+            rather than as causal proof or a guarantee of future
+            performance.
+        </p>
+
+    </div>
+
+</section>
 
 <!-- =========================================================
      RESEARCH QUESTION
